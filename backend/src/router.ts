@@ -7,11 +7,11 @@ const storage = multer.memoryStorage()
 const upload = multer({ dest: "tmp", storage: storage })
 
 const router: Router = Router()
-ConnectMongo()
 
 //Routes
 router.post("/api/sendfile", upload.single("log"), (req: any, res: any) => {
   try {
+    ConnectMongo()
     const fileContent = req.file.buffer.toString("utf-8")
     logController.SendFile(fileContent)
 

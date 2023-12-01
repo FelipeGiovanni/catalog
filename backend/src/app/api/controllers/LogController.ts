@@ -1,4 +1,3 @@
-import { Request, Response } from "express"
 import { LogServicesClass } from "../services/LogServices"
 
 class LogController {
