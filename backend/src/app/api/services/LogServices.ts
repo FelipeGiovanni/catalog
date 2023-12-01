@@ -2,6 +2,7 @@ import mongoose from "mongoose"
 import { LogRegisterSchema } from "../schemas/LogRegisterSchema"
 import { TypeLogRegister } from "../../../types/TypeLog"
 import { MountLog } from "../../../utils/MountLog"
+import { MongoClient } from "mongodb"
 
 export class LogServicesClass {
   static AddRegister(register: TypeLogRegister) {
@@ -15,6 +16,7 @@ export class LogServicesClass {
         idLog: register.idLog,
         titleLog: register.titleLog,
         mensage: register.mensage,
+        allContent: register.allContent,
       })
       log.save().then(
         () => console.log(`One entry ${register.idLog} added`),
@@ -34,5 +36,48 @@ export class LogServicesClass {
       console.log("Add log of index: " + index)
       LogServicesClass.AddRegister(objectLog[index])
     }
+  }
+
+  static GetLogByDateService = async (
+    initialDate: string,
+    finalDate: string
+  ) => {
+    const client = new MongoClient("mongodb://localhost:27017", {})
+    await client.connect()
+
+    const database = client.db("test")
+    const collection = database.collection("newlogs")
+
+    // Converta as strings de data para objetos Date do JavaScript
+    const dataInicialDate = new Date(initialDate)
+    const dataFinalDate = new Date(finalDate)
+
+    // Realize a consulta usando o operador $gte (maior ou igual) e $lte (menor ou igual)
+    const resultados = await collection
+      .find({
+        DateTime: {
+          $gte: dataInicialDate,
+          $lte: dataFinalDate,
+        },
+      })
+      .toArray()
+
+    return resultados
+  }
+
+  static GetLogByContentService = async (content: string) => {
+    const client = new MongoClient("mongodb://localhost:27017", {})
+    await client.connect()
+
+    const database = client.db("test")
+    const collection = database.collection("newlogs")
+
+    const resultados = await collection
+      .find({
+        allContent: new RegExp(content),
+      })
+      .toArray()
+
+    return resultados
   }
 }

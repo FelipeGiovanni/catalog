@@ -8,4 +8,5 @@ export const LogRegisterSchema = new mongoose.Schema({
   idLog: String,
   titleLog: String,
   mensage: String,
+  allContent: String,
 })

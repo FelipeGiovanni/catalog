@@ -6,4 +6,5 @@ export type TypeLogRegister = {
   idLog: String
   titleLog: String
   mensage: String
+  allContent: String
 }

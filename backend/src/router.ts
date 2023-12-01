@@ -26,6 +26,9 @@ router.post("/api/sendfile", upload.single("log"), (req: any, res: any) => {
   }
 })
 
+router.get("/api/getLogByDate", logController.GetLogByDate)
+router.get("/api/getLogByContent", logController.GetLogByContent)
+
 router.use("/api-docs", swaggerUi.serve, swaggerUi.setup(specs))
 router.use(router)
 
