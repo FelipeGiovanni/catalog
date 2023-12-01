@@ -2,13 +2,17 @@ import { Router } from "express"
 import { logController } from "./app/api/controllers/LogController"
 import { ConnectMongo } from "./app/api/services/ConectorMongo"
 
+import { swaggerUi, specs } from "./utils/swagger"
+
 const multer = require("multer")
 const storage = multer.memoryStorage()
+
 const upload = multer({ dest: "tmp", storage: storage })
 
 const router: Router = Router()
 
 //Routes
+
 router.post("/api/sendfile", upload.single("log"), (req: any, res: any) => {
   try {
     ConnectMongo()
@@ -21,5 +25,8 @@ router.post("/api/sendfile", upload.single("log"), (req: any, res: any) => {
     res.status(400).send("Erro interno do servidor")
   }
 })
+
+router.use("/api-docs", swaggerUi.serve, swaggerUi.setup(specs))
+router.use(router)
 
 export { router }

@@ -1,5 +1,5 @@
-import { App } from "./app";
+import { App } from "./app"
 
-const port = 3000;
+const port = 3000
 
-new App().server.listen(port);
+new App().server.listen(port)
