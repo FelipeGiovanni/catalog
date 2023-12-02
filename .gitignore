@@ -3,3 +3,23 @@ node_modules
 package-lock.json
 Logs
 Escopo*
+
+# testing
+coverage
+
+.next/
+out
+
+# production
+build
+
+# misc
+.DS_Store
+*.pem
+
+# local env files
+.env*.local
+
+# typescript
+*.tsbuildinfo
+next-env.d.ts
