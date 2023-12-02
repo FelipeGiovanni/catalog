@@ -29,5 +29,15 @@ class LogController {
       res.status(400).send({ error: error })
     }
   }
+
+  public GetLogById = async (req: Request, res: Response) => {
+    try {
+      const id = req.params.id
+      const DataLogs = await LogServicesClass.GetLogByIdService(id)
+      res.status(200).send({ data: DataLogs })
+    } catch (error) {
+      res.status(400).send({ error: error })
+    }
+  }
 }
 export const logController = new LogController()

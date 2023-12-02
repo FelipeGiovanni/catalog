@@ -80,4 +80,20 @@ export class LogServicesClass {
 
     return resultados
   }
+
+  static GetLogByIdService = async (content: string) => {
+    const client = new MongoClient("mongodb://localhost:27017", {})
+    await client.connect()
+
+    const database = client.db("test")
+    const collection = database.collection("newlogs")
+
+    const result = await collection
+      .find({
+        idLog: content,
+      })
+      .toArray()
+
+    return result
+  }
 }
