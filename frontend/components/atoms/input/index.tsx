@@ -28,15 +28,19 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
             disabled={disabled}
             className={[
               "w-full",
-              "h-12",
+              "h-10",
               "py-3",
-              "pl-20",
+              "pl-4",
               "border",
-              "rounded-full",
+              "border-violet-400",
+              "focus:border-violet-800",
+              "focus:border-2",
+              "hover:border-violet-500",
+              "rounded-md",
               "transition",
               "ease-in-out",
-              "text-gray-dark",
-              "placeholder-gray-medium",
+              "text-gray-800",
+              "placeholder-gray-600",
               "outline-none",
             ].join(" ")}
           />

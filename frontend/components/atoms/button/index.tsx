@@ -11,35 +11,30 @@ type ButtonProps = {
 }
 
 export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ primary, warning, disabled, small, medium, children, ...props }, ref) => {
+  (
+    { primary = true, warning, disabled, small, medium, children, ...props },
+    ref
+  ) => {
     return (
       <button
         ref={ref}
         {...props}
         disabled={disabled}
         className={[
-          "leading-5",
-          "transition-colors",
-          "duration-500",
           "transform",
-          "rounded-bl-3xl",
-          "rounded-tr-3xl",
-          "rounded-br",
-          "rounded-tl",
-          "shadow-md",
-          "py-4",
-          "w-44",
-          "hover:scale-105",
+          "rounded-md",
+          "py-2",
+          "px-1",
+          "w-full",
+          "h-full",
           "transition",
           "ease-out",
-          "duration-300",
-          "opacity-75",
-          "bg-secondary",
-          "text-dark",
-          "hover:opacity-80",
-          "active:opacity-100",
-          primary && ["bg-primary text-white"],
-          warning && ["bg-danger text-white rounded-none"],
+          small && ["w-44"],
+          medium && ["w-56"],
+          primary && [
+            "bg-violet-700 text-white hover:bg-violet-800 active:bg-violet-600",
+          ],
+          warning && ["bg-red-700 text-white"],
         ].join(" ")}
       >
         {children}

@@ -1,10 +1,11 @@
+import { ReactNode } from "react"
+
 type TypeLabel = {
-  className: string
-  label: string
+  children: ReactNode
 }
 
-export const Label = ({ className, label }: TypeLabel) => {
-  return <label className={`text-white ${className}`} />
+export const Label = ({ children }: TypeLabel) => {
+  return <label className={"text-black-700"}>{children}</label>
 }
 
 Label.displayName = "Label"

@@ -1,1 +1,1 @@
-export {} from ""
+export { SearchPage } from "./logsearch/search"
