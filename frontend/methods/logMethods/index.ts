@@ -1,4 +1,5 @@
 import axios from "axios"
+import FormData from "form-data"
 
 export const GetLogById = async (idLog: string) => {
   const log = await axios.get(`http://localhost:4000/api/getLogById/${idLog}`)
@@ -56,4 +57,25 @@ export const GetLogByDate = async (initialDate: Date, finalDate: Date) => {
       console.log(error)
     })
   return response
+}
+
+export const UploadLog = async (file: any) => {
+  const formData = new FormData()
+  formData.append("log", file)
+
+  try {
+    const response = await axios.post(
+      "http://localhost:4000/api/sendfile",
+      formData,
+      {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      }
+    )
+
+    return response
+  } catch (error) {
+    console.error("Error:", error)
+  }
 }

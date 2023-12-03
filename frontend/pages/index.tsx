@@ -10,11 +10,3 @@ const Home: NextPage = () => {
 }
 
 export default Home
-
-//export const getServerSideProps: GetServerSideProps = async (context) => {
-//  const teste = await GetLogById()
-//  console.log(teste)
-//  return {
-//    props: {},
-//  }
-//}

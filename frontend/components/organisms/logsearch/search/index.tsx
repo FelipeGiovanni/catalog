@@ -2,7 +2,7 @@ import { useState } from "react"
 import { Button, Input, Label } from "../../../atoms"
 import { HeaderPage } from "../../../molecules/header"
 import { DateSelect } from "../../../molecules"
-import { GetLogByDate, GetLogByContent } from "../../../../methods"
+import { GetLogByDate, GetLogByContent, UploadLog } from "../../../../methods"
 import DataTable from "react-data-table-component"
 import Link from "next/link"
 
@@ -11,6 +11,7 @@ export const SearchPage = () => {
   const [initialDate, setInitialDate] = useState<Date | null>()
   const [finalDate, setFinalDate] = useState<Date | null>()
   const [contentToFind, setContentToFind] = useState<string | null>()
+  const [file, setFile] = useState<File | null>(null)
 
   const [listOfLogs, setListOfLogs] = useState()
 
@@ -25,6 +26,16 @@ export const SearchPage = () => {
       }
     } else {
     }
+  }
+
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files) {
+      setFile(e.target.files[0])
+    }
+  }
+
+  const handleUpload = async () => {
+    await UploadLog(file)
   }
 
   const columns = [
@@ -73,23 +84,40 @@ export const SearchPage = () => {
     <>
       <HeaderPage title={"Pesquisa de Log"} />
       <div className="px-10 py-4">
-        <div className="py-4 w-1/6">
-          <Label>
-            {searchByDate ? "Busca Por Data" : "Busca Por Conteúdo"}
-          </Label>
+        <div className="flex flex-row space-x-5">
+          <div className="mb-10 w-1/6 h-16">
+            <Label>
+              {searchByDate ? "Busca Por Data" : "Busca Por Conteúdo"}
+            </Label>
 
-          <Button
-            primary
-            small
-            onClick={() => {
-              setSearchByDate(!searchByDate)
-              setInitialDate(null)
-              setFinalDate(null)
-              setContentToFind(null)
-            }}
-          >
-            Alterar Tipo de Busca
-          </Button>
+            <Button
+              primary
+              small
+              onClick={() => {
+                setSearchByDate(!searchByDate)
+                setInitialDate(null)
+                setFinalDate(null)
+                setContentToFind(null)
+              }}
+            >
+              Alterar Tipo de Busca
+            </Button>
+          </div>
+          <div className="mb-10 w-1/2 flex flex-col space-y-2">
+            <div>
+              <input
+                id="file"
+                type="file"
+                placeholder="Selecione um arquivo de log"
+                onChange={handleFileChange}
+              />
+              <label htmlFor="file" className="sr-only">
+                Selecione um arquivo de Log
+              </label>
+            </div>
+
+            {file && <Button onClick={handleUpload}>Realizar Upload</Button>}
+          </div>
         </div>
         <div className="flex flex-row w-1/2 space-x-4">
           <div className="basis-3/4">

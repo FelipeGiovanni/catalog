@@ -1,1 +1,6 @@
-export { GetLogById, GetLogByContent, GetLogByDate } from "./logMethods"
+export {
+  GetLogById,
+  GetLogByContent,
+  GetLogByDate,
+  UploadLog,
+} from "./logMethods"
