@@ -2,9 +2,10 @@ import Link from "next/link"
 import React from "react"
 type BackProps = {
   href?: string
+  subtitle?: string
   title: string
 }
-export const HeaderPage = ({ title, href, ...props }: BackProps) => {
+export const HeaderPage = ({ title, subtitle, href, ...props }: BackProps) => {
   return (
     <div
       className="flex flex-row justify-between border-b border-violet-300 bg-violet-200 min-h-20 w-full align-middle"
@@ -37,6 +38,12 @@ export const HeaderPage = ({ title, href, ...props }: BackProps) => {
           <h1 className="font-bold text-xl leading-10 tracking-wide text-dark-800">
             {title}
           </h1>
+
+          {subtitle && (
+            <h2 className="font-light text-sm leading-8  text-gray-medium">
+              {subtitle}
+            </h2>
+          )}
         </div>
       </div>
     </div>

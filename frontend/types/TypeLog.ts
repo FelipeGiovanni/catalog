@@ -1,6 +1,6 @@
 export type TypeLog = {
   IpUser: String
-  DateTime: Date
+  DateTime: String
   NameUser: String
   TimeConnection: String
   idLog: String

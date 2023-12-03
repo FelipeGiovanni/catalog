@@ -4,7 +4,6 @@ import { HeaderPage } from "../../../molecules/header"
 import { DateSelect } from "../../../molecules"
 import { GetLogByDate, GetLogByContent } from "../../../../methods"
 import DataTable from "react-data-table-component"
-import { TypeLog } from "../../../../types/TypeLog"
 import Link from "next/link"
 
 export const SearchPage = () => {
@@ -20,7 +19,6 @@ export const SearchPage = () => {
       if (searchByDate) {
         const listLogs = await GetLogByDate(initialDate!, finalDate!)
         setListOfLogs(listLogs!)
-        console.log(listOfLogs)
       } else {
         const listLogs = await GetLogByContent(contentToFind!)
         setListOfLogs(listLogs!)
@@ -59,6 +57,15 @@ export const SearchPage = () => {
       name: "Tempo de Conexão",
       width: "10%",
       selector: (row: any) => row.TimeConnection,
+    },
+    {
+      name: "Tempo de Conexão",
+      width: "10%",
+      cell: (row: any) => (
+        <Link href={`/view/${row.idLog}`}>
+          <button onClick={() => console.log(row.idLog)}>teste</button>
+        </Link>
+      ),
     },
   ]
 
